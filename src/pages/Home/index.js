@@ -4,7 +4,7 @@ import MaterialIcon from '@material/react-material-icon/dist/index';
 import Slider from 'react-slick';
 
 import { Wrapper, Container, CarouselTitle, Search, Logo, Mapa } from './styles';
-import { ImageCard } from '../../components';
+import { ImageCard, RestauranteCard } from '../../components';
 
 import logo from '../../assets/logo.svg';
 import restaurante from '../../assets/restaurante-fake.png';
@@ -27,6 +27,7 @@ const Home = () => {
           <Logo src={logo} alt="Logo do Site" />
           <TextField
             label="Pesquisar Restaurante"
+            floatingLabelClassName="label-pesquisa"
             outlined
             // onTrailingIconSelect={() => this.setState({ value: '' })}
             trailingIcon={<MaterialIcon role="button" icon="search" />}>
@@ -35,9 +36,10 @@ const Home = () => {
           <CarouselTitle>Na sua Area</CarouselTitle>
           <Slider {...settings}>
             <ImageCard foto={restaurante} titulo="" />
-            <ImageCard foto={restaurante} />
+            <ImageCard foto={restaurante} titulo="2" />
           </Slider>
         </Search>
+        <RestauranteCard />
       </Container>
       <Mapa />
     </Wrapper>

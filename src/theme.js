@@ -1,9 +1,10 @@
 const theme = {
   colors: {
-    primary: '#6200EE',
+    primary: '#da291c',
+    secondary: '#ffc72c',
     background: '#00000014',
-    text: '#000000B3',
-    success: '#135E01',
+    text: '#27251f',
+    success: '#135e01',
   },
   fonts: {
     regular: 'Roboto, sans-serif',
