@@ -4,7 +4,7 @@ export const Types = {
 };
 
 const initialState = {
-  restaurant: [],
+  restaurants: [],
   restaurantSelected: null,
 };
 
@@ -19,8 +19,16 @@ export default function reducers(state = initialState, action) {
   }
 }
 
-export function setRestaurants() {
+export function setRestaurants(restaurants) {
   return {
     type: Types.SET_RESTAURANTS,
+    payload: restaurants,
+  };
+}
+
+export function setRestaurant(restaurant) {
+  return {
+    type: Types.SET_RESTAURANT,
+    payload: restaurant,
   };
 }

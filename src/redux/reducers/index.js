@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import restautants from '../modulos/restautants';
+import restaurants from '../modulos/restaurants';
 
 export default combineReducers({
-  restautants,
+  restaurants,
 });
