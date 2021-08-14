@@ -4,13 +4,15 @@ import MaterialIcon from '@material/react-material-icon/dist/index';
 import Slider from 'react-slick';
 
 import { Wrapper, Container, CarouselTitle, Search, Logo, Mapa } from './styles';
-import { ImageCard, RestauranteCard } from '../../components';
+import { ImageCard, RestauranteCard, Modal } from '../../components';
 
 import logo from '../../assets/logo.svg';
 import restaurante from '../../assets/restaurante-fake.png';
 
 const Home = () => {
   const [inputValue, setInputValue] = useState();
+  const [modalOpen, setModalOpen] = useState(false);
+
   const settings = {
     dots: false,
     infinite: true,
@@ -42,6 +44,7 @@ const Home = () => {
         <RestauranteCard />
       </Container>
       <Mapa />
+      <Modal open={modalOpen} onClose={() => setModalOpen(!modalOpen)} />
     </Wrapper>
   );
 };
