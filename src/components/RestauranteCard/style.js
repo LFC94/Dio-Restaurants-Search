@@ -33,5 +33,13 @@ export const Address = styled.span`
   color: ${(props) => props.theme.colors.text};
   font-size: 14px;
   line-height: 16px;
+  margin-top: 10px;
   margin-bottom: 10px;
+`;
+
+export const Photo = styled.img`
+  width: 100px;
+  height: 100px;
+  border-radius: 19px;
+  object-fit: cover;
 `;
