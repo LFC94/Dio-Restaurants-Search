@@ -3,14 +3,15 @@ import TextField, { Input } from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon/dist/index';
 import Slider from 'react-slick';
 
-import { Wrapper, Container, CarouselTitle, Search, Logo, Mapa } from './styles';
-import { ImageCard, RestauranteCard, Modal } from '../../components';
+import { Wrapper, Container, CarouselTitle, Search, Logo } from './styles';
+import { ImageCard, RestauranteCard, Modal, Map } from '../../components';
 
 import logo from '../../assets/logo.svg';
 import restaurante from '../../assets/restaurante-fake.png';
 
 const Home = () => {
   const [inputValue, setInputValue] = useState();
+  const [query, setQuery] = useState();
   const [modalOpen, setModalOpen] = useState(false);
 
   const settings = {
@@ -21,6 +22,12 @@ const Home = () => {
     slidesToScroll: 4,
     adaptiveHeight: true,
   };
+
+  function handleChange(e) {
+    if (e.key === 'Enter') {
+      setQuery(inputValue);
+    }
+  }
 
   return (
     <Wrapper>
@@ -33,7 +40,11 @@ const Home = () => {
             outlined
             // onTrailingIconSelect={() => this.setState({ value: '' })}
             trailingIcon={<MaterialIcon role="button" icon="search" />}>
-            <Input value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+            <Input
+              value={inputValue}
+              onKeyPress={handleChange}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
           </TextField>
           <CarouselTitle>Na sua Area</CarouselTitle>
           <Slider {...settings}>
@@ -43,7 +54,7 @@ const Home = () => {
         </Search>
         <RestauranteCard />
       </Container>
-      <Mapa />
+      <Map query={query} />
       <Modal open={modalOpen} onClose={() => setModalOpen(!modalOpen)} />
     </Wrapper>
   );
