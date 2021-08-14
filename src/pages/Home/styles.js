@@ -32,9 +32,10 @@ export const Mapa = styled.div`
 
 export const CarouselTitle = styled.h1`
   font-family: ${(props) => props.theme.fonts.regular};
-  color: ${(props) => props.theme.colors.texto};
+  color: ${(props) => props.theme.colors.secondary};
   font-size: 24px;
   font-weight: bold;
   line-height: 29px;
   margin: 16px 0;
+  border-top: 1px solid ${(props) => props.theme.colors.background};
 `;

@@ -13,3 +13,25 @@ export const Restaurante = styled.div`
     background-color: ${(props) => props.theme.colors.background};
   }
 `;
+
+export const RestauranteInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Title = styled.span`
+  font-family: ${(props) => props.theme.fonts.regular};
+  color: ${(props) => props.theme.colors.text};
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 29px;
+  margin-bottom: 10px;
+`;
+
+export const Address = styled.span`
+  font-family: ${(props) => props.theme.fonts.regular};
+  color: ${(props) => props.theme.colors.text};
+  font-size: 14px;
+  line-height: 16px;
+  margin-bottom: 10px;
+`;
