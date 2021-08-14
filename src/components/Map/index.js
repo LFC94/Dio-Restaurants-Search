@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleApiWrapper, Map } from 'google-maps-react';
+import { useDispatch } from 'react-redux';
+
+import { setRestaurants } from '../../redux/modulos/restautants';
 
 export const MapContainer = (props) => {
+  const dispatch = useDispatch();
   const [map, setMap] = useState(null);
   const { google, query } = props;
   let searchByQuery;
 
   useEffect(() => {
     if (query) searchByQuery(query);
-  }, [query]);
+  }, [query, searchByQuery]);
 
   searchByQuery = (query) => {
     const service = new google.maps.places.PlacesService(map);
@@ -20,7 +24,7 @@ export const MapContainer = (props) => {
     };
     service.textSearch(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        console.log('rest=====>', results);
+        dispatch(setRestaurants(results));
       }
     });
   };
@@ -34,7 +38,7 @@ export const MapContainer = (props) => {
     };
     service.nearbySearch(request, (results, status) => {
       if (status === google.maps.places.PlacesServiceStatus.OK) {
-        console.log('rest=====>', results);
+        dispatch(setRestaurants(results));
       }
     });
   }
