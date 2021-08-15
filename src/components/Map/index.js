@@ -2,22 +2,28 @@ import React, { useEffect, useState } from 'react';
 import { GoogleApiWrapper, Map, Marker } from 'google-maps-react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { setRestaurants } from '../../redux/modulos/restaurants';
+import { setRestaurants, setRestaurant } from '../../redux/modulos/restaurants';
 
 export const MapContainer = (props) => {
   const dispatch = useDispatch();
   const { restaurants } = useSelector((state) => state.restaurants);
   const [map, setMap] = useState(null);
-  const { google, query } = props;
-  let searchByQuery;
+  const { google, query, placeId } = props;
 
-  useEffect(() => {
-    if (query) {
-      searchByQuery(query);
-    }
-  }, [query]);
+  function getRestaurantesById(placeId) {
+    const service = new google.maps.places.PlacesService(map);
+    const request = {
+      placeId,
+      filds: ['name', 'opening_hours', 'fotmatted_address', 'formatted_phone_number'],
+    };
+    service.getDetails(request, (place, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        dispatch(setRestaurant(place));
+      }
+    });
+  }
 
-  searchByQuery = (query) => {
+  function searchByQuery(query) {
     const service = new google.maps.places.PlacesService(map);
     const request = {
       location: map.center,
@@ -30,7 +36,7 @@ export const MapContainer = (props) => {
         dispatch(setRestaurants(results));
       }
     });
-  };
+  }
 
   function searchNearby(map, center) {
     const service = new google.maps.places.PlacesService(map);
@@ -51,8 +57,25 @@ export const MapContainer = (props) => {
     searchNearby(map, map.center);
   }
 
+  useEffect(() => {
+    if (query) {
+      searchByQuery(query);
+    }
+  }, [query]);
+
+  useEffect(() => {
+    if (placeId) {
+      getRestaurantesById(placeId);
+    }
+  }, [placeId]);
+
   return (
-    <Map google={google} centerAroundCurrentLocation onReady={onMapReady} onRecenter={onMapReady}>
+    <Map
+      google={google}
+      centerAroundCurrentLocation
+      onReady={onMapReady}
+      onRecenter={onMapReady}
+      {...props}>
       {restaurants.map((restaurant) => (
         <Marker
           key={restaurant.place_id}

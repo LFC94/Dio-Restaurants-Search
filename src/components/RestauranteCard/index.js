@@ -7,7 +7,7 @@ import theme from '../../theme';
 
 import { Address, Restaurante, RestauranteInfo, Title, Photo, MultPhoto } from './style';
 
-const RestauranteCard = ({ restaurant }) => {
+const RestauranteCard = ({ restaurant, onClick }) => {
   const settings = {
     dots: true,
     infinite: true,
@@ -19,7 +19,7 @@ const RestauranteCard = ({ restaurant }) => {
   };
 
   return (
-    <Restaurante>
+    <Restaurante onClick={onClick}>
       <RestauranteInfo>
         <Title>{restaurant.name}</Title>
         <ReactStars

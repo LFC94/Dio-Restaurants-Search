@@ -9,11 +9,11 @@ export const Overlay = styled.div`
 
   display: flex;
   justify-content: center;
-  align-item: center;
+  align-items: center;
   width: 100%;
   height: 100%;
 
-  background-color: rgba(78, 89, 131, 0.5);
+  background-color: rgba(127, 127, 127, 0.9);
   backdrop-filter: blur(5px);
 
   z-index: 999;

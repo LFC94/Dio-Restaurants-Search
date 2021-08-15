@@ -3,7 +3,16 @@ import TextField, { Input } from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon/dist/index';
 import { useSelector } from 'react-redux';
 
-import { Wrapper, Container, Carousel, CarouselTitle, Search, Logo } from './styles';
+import {
+  Wrapper,
+  Container,
+  Carousel,
+  CarouselTitle,
+  Search,
+  Logo,
+  ModalTitle,
+  ModalContent,
+} from './styles';
 import { ImageCard, RestauranteCard, Modal, Map } from '../../components';
 
 import logo from '../../assets/logo.svg';
@@ -12,7 +21,8 @@ import imgRestaurante from '../../assets/restaurante-fake.png';
 const Home = () => {
   const [inputValue, setInputValue] = useState();
   const [query, setQuery] = useState();
-  const { restaurants } = useSelector((state) => state.restaurants);
+  const [placeId, setPlaceId] = useState(null);
+  const { restaurants, restaurantSelected } = useSelector((state) => state.restaurants);
   const [modalOpen, setModalOpen] = useState(false);
 
   const settings = {
@@ -29,6 +39,11 @@ const Home = () => {
     if (e.key === 'Enter') {
       setQuery(inputValue);
     }
+  }
+
+  function handleOpenModal(placeId) {
+    setPlaceId(placeId);
+    setModalOpen(true);
   }
 
   return (
@@ -60,11 +75,23 @@ const Home = () => {
           </Carousel>
         </Search>
         {restaurants.map((restaurant) => (
-          <RestauranteCard restaurant={restaurant} />
+          <RestauranteCard
+            restaurant={restaurant}
+            onClick={() => handleOpenModal(restaurant.place_id)}
+          />
         ))}
       </Container>
-      <Map query={query} />
-      <Modal open={modalOpen} onClose={() => setModalOpen(!modalOpen)} />
+      <Map query={query} placeId={placeId} />
+      <Modal open={modalOpen} onClose={() => setModalOpen(!modalOpen)}>
+        <ModalTitle>{restaurantSelected?.name}</ModalTitle>
+        <ModalContent>{restaurantSelected?.['formatted_phone_number']}</ModalContent>
+        <ModalContent>{restaurantSelected?.['formatted_address']}</ModalContent>
+        <ModalContent>
+          {restaurantSelected?.['openning_hours']?.['open_now']
+            ? 'Aberto agora :-)'
+            : 'Esta fechado :-('}
+        </ModalContent>
+      </Modal>
     </Wrapper>
   );
 };
