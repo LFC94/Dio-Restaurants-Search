@@ -1,19 +1,25 @@
 import React from 'react';
 import ReactStars from 'react-rating-stars-component';
-import restaurante from '../../assets/restaurante-fake.png';
+import imgRestaurante from '../../assets/restaurante-fake.png';
 
 import theme from '../../theme';
 
 import { Address, Restaurante, RestauranteInfo, Title, Photo } from './style';
 
-const RestauranteCard = () => (
+const RestauranteCard = ({ restaurant }) => (
   <Restaurante>
     <RestauranteInfo>
-      <Title>Nome</Title>
-      <ReactStars count={5} isHalf edit={false} value={4} activeColor={theme.colors.secundary} />
-      <Address>ender</Address>
+      <Title>{restaurant.name}</Title>
+      <ReactStars
+        count={5}
+        isHalf
+        edit={false}
+        value={restaurant.rating}
+        activeColor={theme.colors.secundary}
+      />
+      <Address>{restaurant.vicinity || restaurant.formatted_address}</Address>
     </RestauranteInfo>
-    <Photo src={restaurante} alt="Foto" />
+    <Photo src={restaurant.photos ? restaurant.photos[0].getUrl() : imgRestaurante} alt="Foto" />
   </Restaurante>
 );
 

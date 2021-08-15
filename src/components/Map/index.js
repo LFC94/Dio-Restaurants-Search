@@ -9,13 +9,15 @@ export const MapContainer = (props) => {
   const { restaurants } = useSelector((state) => state.restaurants);
   const [map, setMap] = useState(null);
   const { google, query } = props;
+  let searchByQuery;
 
   useEffect(() => {
-    if (query) searchByQuery(query);
+    if (query) {
+      searchByQuery(query);
+    }
   }, [query]);
 
-  function searchByQuery(query) {
-    console.log(query);
+  searchByQuery = (query) => {
     const service = new google.maps.places.PlacesService(map);
     const request = {
       location: map.center,
@@ -28,7 +30,7 @@ export const MapContainer = (props) => {
         dispatch(setRestaurants(results));
       }
     });
-  }
+  };
 
   function searchNearby(map, center) {
     const service = new google.maps.places.PlacesService(map);
