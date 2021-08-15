@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import TextField, { Input } from '@material/react-text-field';
 import MaterialIcon from '@material/react-material-icon/dist/index';
-import Slider from 'react-slick';
 import { useSelector } from 'react-redux';
 
-import { Wrapper, Container, CarouselTitle, Search, Logo } from './styles';
+import { Wrapper, Container, Carousel, CarouselTitle, Search, Logo } from './styles';
 import { ImageCard, RestauranteCard, Modal, Map } from '../../components';
 
 import logo from '../../assets/logo.svg';
@@ -19,6 +18,7 @@ const Home = () => {
   const settings = {
     dots: false,
     infinite: true,
+    autoplay: true,
     speed: 300,
     slidesToShow: 4,
     slidesToScroll: 4,
@@ -30,7 +30,7 @@ const Home = () => {
       setQuery(inputValue);
     }
   }
-  console.log('1', restaurants);
+
   return (
     <Wrapper>
       <Container>
@@ -49,7 +49,7 @@ const Home = () => {
             />
           </TextField>
           <CarouselTitle>Na sua Area</CarouselTitle>
-          <Slider {...settings}>
+          <Carousel {...settings}>
             {restaurants.map((restaurant) => (
               <ImageCard
                 key={restaurant.place_id}
@@ -57,7 +57,7 @@ const Home = () => {
                 titulo={restaurant.name}
               />
             ))}
-          </Slider>
+          </Carousel>
         </Search>
         {restaurants.map((restaurant) => (
           <RestauranteCard restaurant={restaurant} />

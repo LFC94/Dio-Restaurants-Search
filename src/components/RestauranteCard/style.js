@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Slider from 'react-slick';
 
 export const Restaurante = styled.div`
   display: flex;
@@ -8,6 +9,7 @@ export const Restaurante = styled.div`
   padding: 16px;
   background-color: #ffffff;
   border-left: 5px solid transparent;
+  align-items: center;
   :hover {
     border-left-color: ${(props) => props.theme.colors.secondary};
     background-color: ${(props) => props.theme.colors.background};
@@ -17,6 +19,7 @@ export const Restaurante = styled.div`
 export const RestauranteInfo = styled.div`
   display: flex;
   flex-direction: column;
+  width: 149px;
 `;
 
 export const Title = styled.span`
@@ -42,4 +45,10 @@ export const Photo = styled.img`
   height: 100px;
   border-radius: 19px;
   object-fit: cover;
+`;
+
+export const MultPhoto = styled(Slider)`
+  width: 100px;
+  height: 100px;
+  border-radius: 19px;
 `;
